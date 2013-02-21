@@ -5,9 +5,10 @@ redaxo5 Klassen/Funktionen für REDAXO 4.5
 
 Wenn das eigene AddOn/Plugin auf der "Autoload"-Seite ausgewählt wurde, werden Fragmente, Sprachdateien und Klassen automatisch geladen.
 
-h2. Folgende Ordner sollten vorhanden sein
+h3. Folgende Ordner sollten vorhanden sein
 
-- fragments/ := Fragmente
-- lang/ := Sprachdateien
-- lib/ := interne Klassen
-- vendor/ := externe Klassen
+|_. Ordner |_. Beschreibung |
+| *fragments/* | Fragmente |
+| *lang/* | Sprachdateien |
+| *lib/* | interne Klassen |
+| *vendor/* | externe Klassen |
