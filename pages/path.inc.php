@@ -37,21 +37,8 @@ foreach ($methods as $method) {
     $cell = '';
     $name   = $method->getName();
     if (is_array($set_parameters)) {
-        switch (count($set_parameters)) {
-            case '3':
-                $cell = rex_path::$name($set_parameters[0], $set_parameters[1], $set_parameters[2]);
-                break;
-            case '2':
-                $cell = rex_path::$name($set_parameters[0], $set_parameters[1]);
-                break;
-            case '1':
-                $cell = rex_path::$name($set_parameters[0]);
-                break;
-            default :
-                $cell = rex_path::$name();
-                break;
-        }
-        $cell = preg_replace('@(' . rtrim(rex_path::base(), '/') . ')@', '<span class="redaxo5-expandable">$1</span>', $cell);
+        $cell = call_user_func_array(array('rex_path', $name), $set_parameters);
+        $cell = preg_replace('@(' . preg_quote( rtrim(rex_path::base(), '@'), '/') . ')@', '<span class="redaxo5-expandable">$1</span>', $cell);
     }
     $echo[] = '<th>rex_path::' . $name . '(' . implode(', ', $echo_parameters) . ')</th><td>' . $cell . '</td>';
 }
