@@ -1,0 +1,15 @@
+redaxo5_title = REDAXO 5
+
+redaxo5_autoload = Autoload
+redaxo5_autoload_addon_plugin = Auswahl
+redaxo5_autoload_addon_plugin_note = AddOns/Plugins auswählen deren Klassen, Fragmente und Sprachdateien <br />automatisch geladen werden sollen
+
+redaxo5_config_updated = Konfigurationsdatei aktualisiert
+
+
+redaxo5_save = Speichern
+redaxo5_structure = Die AddOns und Plugins benötigen folgende Ordner
+
+redaxo5_path = rex_path
+redaxo5_path_header_call = Aufruf
+redaxo5_path_header_return = Rückgabe
