@@ -38,7 +38,7 @@ foreach ($methods as $method) {
     $name   = $method->getName();
     if (is_array($set_parameters)) {
         $cell = call_user_func_array(array('rex_path', $name), $set_parameters);
-        $cell = preg_replace('@(' . preg_quote( rtrim(rex_path::base(), '@'), '/') . ')@', '<span class="redaxo5-expandable">$1</span>', $cell);
+        $cell = preg_replace('@(' . preg_quote( rtrim(rex_path::base(), '/'), '@') . ')@', '<span class="redaxo5-expandable">$1</span>', $cell);
     }
     $echo[] = '<th>rex_path::' . $name . '(' . implode(', ', $echo_parameters) . ')</th><td>' . $cell . '</td>';
 }
