@@ -1,5 +1,13 @@
 <?php
 
+/**
+ *
+ * @author blumbeet - web.studio
+ * @author Thomas Blum
+ * @author mail[at]blumbeet[dot]com Thomas Blum
+ *
+ */
+
 $func = rex_request('func', 'string');
 
 $mypage = 'redaxo5';
