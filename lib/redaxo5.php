@@ -8,6 +8,7 @@ class redaxo5
 {
 
     private
+        $args,
         $class,
         $ellipsize,
         $filter,
@@ -15,8 +16,9 @@ class redaxo5
         $replace,
         $scheme;
 
-    public function __construct($class)
+    public function __construct($class, array $args = array())
     {
+        $this->args      = $args;
         $this->class     = $class;
         $this->ellipsize = array();
         $this->filter    = array();
@@ -66,7 +68,7 @@ class redaxo5
         if (count($methods) > 0) {
             foreach ($methods as $method) {
 
-                $return[] = '<dl><dt>' . $method['call'] . '</dt><dd>' . $method['return'] . '</dd></dl>';
+                $return[] = '<dl><dt>' . $method['call'] . '</dt><dd ' . (strip_tags($method['return']) != '' ? ' class="redaxo5-return"' : '') . '>' . $method['return'] . '</dd></dl>';
             }
         }
         return $return;
@@ -76,34 +78,48 @@ class redaxo5
     {
         $r = array();
 
-        $class   = new ReflectionClass( $this->class );
-        $methods = $class->getMethods();
+        $class    = new ReflectionClass($this->class);
+        $instance = $class->newInstanceArgs($this->args);
+        $methods  = $class->getMethods();
 
         foreach ($methods as $method) {
 
-            if (in_array($method->getName(), $this->filter)) {
+            $method_name = $method->getName();
+            if (in_array($method_name, $this->filter)) {
                 continue;
             }
 
+            $scheme = $this->scheme;
             $parameters = $method->getParameters();
             $echo_parameters = array();
             $set_parameters  = array();
             foreach ($parameters as $parameter) {
+                $parameter_name = $parameter->getName();
                 $default = '';
-                if (isset($this->replace[ $parameter->getName() ])) {
-                    $default = ' = ' . var_export($this->replace[ $parameter->getName() ], true);
-                    $set_parameters[] = $this->replace[ $parameter->getName() ];
+                if (isset($this->replace[$parameter_name]) || isset($this->replace[$method_name][$parameter_name]) ) {
+
+                    if (isset($this->replace[$method_name][$parameter_name])) {
+                        $param = $this->replace[$method_name][$parameter_name];
+                    } else {
+                        $param = $this->replace[$parameter_name];
+                    }
+
+                    $default = ' = ' . var_export($param, true);
+                    $set_parameters[] = $param;
                 } elseif ($parameter->isOptional()) {
                     $default = ' = ' . var_export($parameter->getDefaultValue(), true);
                 }
 
-                $echo_parameters[] = str_replace(array('[:parameter:]', '[:value:]'), array($parameter->getName(), $default), $this->scheme['parameters']);
+                $echo_parameters[] = trim(str_replace(array('[:parameter:]', '[:value:]'), array($parameter_name, $default), $scheme['parameters']));
             }
 
-            $return = '';
-            $name = $method->getName();
-            if (is_array($set_parameters)) {
-                $return = call_user_func_array(array($this->class, $name), $set_parameters);
+            if ($method->isStatic() && is_array($set_parameters)) {
+                $return = call_user_func_array(array($this->class, $method_name), $set_parameters);
+            } elseif ($method->isPublic() && is_array($set_parameters)) {
+                $scheme['call'] = str_replace('[:class:]::', 'instance->', $scheme['call']);
+                $return = call_user_func_array(array($instance, $method_name), $set_parameters);
+            } else {
+                continue;
             }
 
             if (is_array($return)) {
@@ -123,12 +139,14 @@ class redaxo5
 
             $m = array();
             $m['class']       = $this->class;
-            $m['name']        = $name;
+            $m['name']        = $method_name;
             $m['parameters']  = implode(', ', $echo_parameters);
             $m['return']      = $return;
 
-            $r[] = array('call'     => str_replace(array('[:class:]', '[:method:]', '[:parameters:]'), array($m['class'], $m['name'], $m['parameters']), $this->scheme['call']),
-                         'return'   => str_replace('[:return:]', $m['return'], $this->scheme['return']));
+            $r[] = array(
+                'call'     => str_replace(array('[:class:]', '[:method:]', '[:parameters:]'), array($m['class'], $m['name'], $m['parameters']), $scheme['call']),
+                'return'   => str_replace('[:return:]', $m['return'], $scheme['return'])
+            );
 
         }
 
