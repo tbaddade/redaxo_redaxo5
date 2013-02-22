@@ -21,10 +21,10 @@ $mypage = 'redaxo5';
 $basedir = __DIR__;
 
 // REDAXO 5 Hilfsklassen
-require_once $basedir . '/lib/util/path.php';
+require_once $basedir . '/vendor/redaxo5/lib/util/path.php';
 rex_path::init($REX['HTDOCS_PATH'], 'redaxo/include');
 
-require_once $basedir . '/lib/autoload.php';
+require_once $basedir . '/vendor/redaxo5/lib/autoload.php';
 rex_autoload::register();
 rex_autoload::addDirectory(rex_path::addon($mypage . '/lib'));
 rex_autoload::addDirectory(rex_path::addon($mypage . '/vendor'));
