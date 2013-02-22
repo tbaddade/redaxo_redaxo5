@@ -173,7 +173,7 @@ class rex_path
     {
         // tab :: Pfad angepasst
         // return self::src('core/' . $file);
-        return self::src('addons/redaxo5/' . $file);
+        return self::src('addons/redaxo5/vendor/redaxo5/' . $file);
     }
 
     /**
