@@ -13,7 +13,7 @@ $filter  = array('currentBackendPage');
 
 $c = new redaxo5($class);
 $c->addFilter($filter);
-$c->addReplace($replace);
+$c->addReplace($replace[$class]);
 
 echo '
     <div class="rex-addon-output">

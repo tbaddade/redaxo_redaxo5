@@ -13,7 +13,7 @@ $filter  = array('yamlEncode', 'yamlDecode', 'pluginData');
 
 $c = new redaxo5($class);
 $c->addFilter($filter);
-$c->addReplace($replace);
+$c->addReplace($replace[$class]);
 
 
 echo '

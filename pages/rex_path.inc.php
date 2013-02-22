@@ -13,7 +13,7 @@ $filter  = array('init', 'addonData', 'pluginData');
 
 $c = new redaxo5($class);
 $c->addFilter($filter);
-$c->addReplace($replace);
+$c->addReplace($replace[$class]);
 $c->setRegexp('@(' . preg_quote( rtrim(rex_path::base(), '/'), '@') . ')@', '<span class="redaxo5-expandable">$1</span>');
 $c->setScheme(array(
                     'call'          => '[:class:]::<b>[:method:]</b>([:parameters:])',
