@@ -157,7 +157,6 @@ Auslistung mitgelieferte Klassen
 - rex_dir
 - rex_file
 - rex_finder
-- rex_formatter
 - rex_fragment
 - rex_i18n
 - rex_pager
