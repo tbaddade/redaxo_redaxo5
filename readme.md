@@ -149,7 +149,7 @@ $file kann leer sein.
 
 
 
-Auslistung mitgelieferte Klassen
+Auflistung mitgelieferter Klassen
 --------------------------------------------------------------------------------
 
 - rex [1]
