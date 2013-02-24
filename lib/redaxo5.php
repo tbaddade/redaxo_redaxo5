@@ -2,7 +2,33 @@
 /**
  * @author: thomas.blum
  */
+/*
+class rex_reflection_class
+{
 
+    public function __construct($class)
+    {
+        $this->name = $class;
+    }
+
+
+}
+
+class rex_reflection_method
+{
+
+    public function __construct($method)
+    {
+        $this->name = $method;
+    }
+
+    public function getMagicMethods()
+    {
+
+    }
+
+}
+*/
 
 class redaxo5
 {
@@ -113,10 +139,15 @@ class redaxo5
                 $echo_parameters[] = trim(str_replace(array('[:parameter:]', '[:value:]'), array($parameter_name, $default), $scheme['parameters']));
             }
 
-            if ($method->isStatic() && is_array($set_parameters)) {
+            if ($method->isPrivate() || $method->isProtected()) {
+                continue;
+            } elseif ($method->isStatic()) {
                 $return = call_user_func_array(array($this->class, $method_name), $set_parameters);
-            } elseif ($method->isPublic() && is_array($set_parameters)) {
-                $scheme['call'] = str_replace('[:class:]::', 'instance->', $scheme['call']);
+            } elseif ($method->isConstructor()) {
+                $scheme['call'] = str_replace(array('[:class:]::', '[:method:]'), array('$instance = new ' . $this->class, ''), $scheme['call']);
+                $return = call_user_func_array(array($instance, $method_name), $set_parameters);
+            } elseif ($method->isPublic()) {
+                $scheme['call'] = str_replace('[:class:]::', '$instance->', $scheme['call']);
                 $return = call_user_func_array(array($instance, $method_name), $set_parameters);
             } else {
                 continue;
@@ -153,7 +184,6 @@ class redaxo5
         return $r;
     }
 }
-
 
 class redaxo5_helper
 {
