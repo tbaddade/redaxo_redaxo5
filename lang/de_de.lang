@@ -12,7 +12,7 @@ redaxo5_header_return = Rückgabe
 redaxo5_save = Speichern
 redaxo5_structure = Die AddOns und Plugins benötigen folgende Ordner
 
-redaxo5_rex_fragment = rex_fragment
-redaxo5_rex_path = rex_path
-redaxo5_rex_string = rex_string
-redaxo5_rex_url = rex_url
+redaxo5_no_documentation_found = Keine Dokumentation gefunden
+
+redaxo5_i18n_addMsg = Wert über addMsg hinzugefügt
+redaxo5_i18n_key = Wert des "lang" Schlüssels
