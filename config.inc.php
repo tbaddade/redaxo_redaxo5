@@ -28,7 +28,7 @@ rex_autoload::register();
 rex_autoload::addDirectory(rex_path::addon($mypage, 'lib'));
 rex_autoload::addDirectory(rex_path::addon($mypage, 'vendor'));
 
-rex_fragment::addDirectory(rex_path::addon($mypage, 'fragments'));
+rex_fragment::addDirectory(rex_path::addon($mypage, 'fragments/'));
 
 rex_i18n::addDirectory(rex_path::addon($mypage, 'lang'));
 
