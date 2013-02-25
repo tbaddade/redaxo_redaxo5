@@ -104,7 +104,7 @@ $path = rex_path::addon($addon = 'addoff', $file = '');
 
 ```php
 $path = rex_path::plugin($addon = 'addoff', $plugin = 'plugout', $file = '');
-> /absoluter/Pfad/files/addons/addoff/plugins/plugoff/
+> /absoluter/Pfad/files/addons/addoff/plugins/plugout/
 ```
 
 
