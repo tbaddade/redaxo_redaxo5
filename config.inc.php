@@ -11,7 +11,6 @@
 
 // --- DYN
 $REX['ADDON']['REDAXO5']['AUTOLOAD'] = array (
-  0 => 'pool',
 );
 // --- /DYN
 
