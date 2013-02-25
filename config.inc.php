@@ -26,12 +26,12 @@ rex_path::init($REX['HTDOCS_PATH'], 'redaxo/include');
 
 require_once $basedir . '/vendor/redaxo5/lib/autoload.php';
 rex_autoload::register();
-rex_autoload::addDirectory(rex_path::addon($mypage . '/lib'));
-rex_autoload::addDirectory(rex_path::addon($mypage . '/vendor'));
+rex_autoload::addDirectory(rex_path::addon($mypage, 'lib'));
+rex_autoload::addDirectory(rex_path::addon($mypage, 'vendor'));
 
-rex_fragment::addDirectory(rex_path::addon($mypage . '/fragments'));
+rex_fragment::addDirectory(rex_path::addon($mypage, 'fragments'));
 
-rex_i18n::addDirectory(rex_path::addon($mypage . '/lang'));
+rex_i18n::addDirectory(rex_path::addon($mypage, 'lang'));
 
 switch ($REX['CUR_CLANG']) {
     case '1';
@@ -54,11 +54,11 @@ $REX['ADDON']['perm'][$mypage]        = 'admin[]';
 
 if (count($REX['ADDON']['REDAXO5']['AUTOLOAD']) > 0) {
     foreach ($REX['ADDON']['REDAXO5']['AUTOLOAD'] as $dir) {
-        rex_autoload::addDirectory(rex_path::addon($dir . '/lib'));
-        rex_autoload::addDirectory(rex_path::addon($dir . '/vendor'));
+        rex_autoload::addDirectory(rex_path::addon($dir, 'lib'));
+        rex_autoload::addDirectory(rex_path::addon($dir, 'vendor'));
 
-        rex_fragment::addDirectory(rex_path::addon($dir . '/fragments'));
+        rex_fragment::addDirectory(rex_path::addon($dir, 'fragments'));
 
-        rex_i18n::addDirectory(rex_path::addon($dir . '/lang'));
+        rex_i18n::addDirectory(rex_path::addon($dir, 'lang'));
     }
 }
