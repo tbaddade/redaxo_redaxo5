@@ -74,7 +74,7 @@ $docs = array(
     'rex_fragment'  => array(
         'replace'       => array(
             'name'          => 'redaxo5',
-            'path'          => redaxo5_expandable(rex_path::base(), rex_path::addon('redaxo5/fragments')),
+            'dir'          => redaxo5_expandable(rex_path::base(), rex_path::addon('redaxo5', 'fragments')),
             'decorate'      => array('filename' => 'redaxo5.tpl', 'params' => array()),
             'subfragment'   => array('filename' => 'redaxo5.tpl', 'params' => array()),
             'i18n'          => array('key' => 'redaxo5_title'),
@@ -90,7 +90,7 @@ $docs = array(
         ),
         'replace'       => array(
             'locale'            => 'de_DE',
-            'dir'               => redaxo5_expandable(rex_path::base(), rex_path::addon('addoff/lang')),
+            'dir'               => redaxo5_expandable(rex_path::base(), rex_path::addon('addoff', 'lang')),
             'key'               => 'redaxo5_i18n_key',
             'addMsg'            => array('key' => 'redaxo5_i18n_new_key', 'msg' => rex_i18n::msg('redaxo5_i18n_addMsg')),
             'text'              => 'translate:redaxo5_title',
