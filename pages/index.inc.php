@@ -28,47 +28,6 @@ if (!function_exists('redaxo5_expandable')) {
 
 $mypage = 'redaxo5';
 
-require $REX['INCLUDE_PATH'] . '/layout/top.php';
-
-echo '
-<style type="text/css">
-    .redaxo5-expandable {
-        display: inline-block;
-        width: 150px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .redaxo5-class dl {
-        margin-top: -1px;
-        border-top: 1px solid #CBCBCB;
-        font-size: 11px;
-    }
-    .redaxo5-class dt,
-    .redaxo5-class dd {
-        padding: 10px 5px;
-        font-family: Menlo, Monaco, monospace;
-    }
-    .redaxo5-class dt {
-        display: block;
-        background-color: #DFE9E9;
-    }
-    .redaxo5-class dd {
-        display: inline-block;
-        margin: 0 0 20px 0;
-        padding-left: 20px;
-    }
-    .redaxo5-class dd.redaxo5-return:before {
-        display: inline-block;
-        content: "return";
-        margin-bottom: 5px;
-        padding-right: 5px;
-        font-weight: normal;
-    }
-</style>';
-
-
 $docs = array(
 
     'rex_fragment'  => array(
@@ -100,8 +59,6 @@ $docs = array(
     'rex_path'      => array(
         'filter'        => array(
             'init',
-            'addonData',
-            'pluginData',
         ),
         'regex'         => array(
             'pattern'       => '@(' . preg_quote( rtrim(rex_path::base(), '/'), '@') . ')@',
@@ -135,19 +92,61 @@ $docs = array(
     ),
     'rex_url'       => array(
         'filter'        => array(
+            'init',
             'currentBackendPage',
         ),
         'replace'       => array(
             'addon'         => 'addoff',
             'plugin'        => 'plugout',
-            'backend'       => redaxo5_expandable(rex_path::base(), rex_path::backend()),
-            'htdocs'        => $REX['HTDOCS_PATH'],
+            'backend'       => array('file' => 'index.php'),
             'page'          => 'butler',
             'params'        => array('article_id' => 1, 'clang' => 0),
         ),
     ),
 );
 
+
+
+require $REX['INCLUDE_PATH'] . '/layout/top.php';
+
+echo '
+<style type="text/css">
+    .redaxo5-expandable {
+        display: inline-block;
+        width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .redaxo5-class dl {
+        margin-top: -1px;
+        border-top: 1px solid #CBCBCB;
+        font-size: 11px;
+    }
+    .redaxo5-class dt,
+    .redaxo5-class dd {
+        padding: 10px 5px;
+        font-family: Menlo, Monaco, monospace;
+        line-height: 15px;
+    }
+    .redaxo5-class dt {
+        display: block;
+        background-color: #DFE9E9;
+    }
+    .redaxo5-class dd {
+        display: inline-block;
+        margin: 0 0 20px 0;
+        padding-left: 20px;
+    }
+    .redaxo5-class dd.redaxo5-return:before {
+        display: inline-block;
+        content: "return";
+        margin-bottom: 5px;
+        padding-right: 5px;
+        font-weight: normal;
+    }
+</style>';
 
 
 switch ($subpage) {
