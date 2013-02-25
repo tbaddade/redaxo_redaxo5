@@ -21,7 +21,9 @@ $basedir = __DIR__;
 
 // REDAXO 5 Hilfsklassen
 require_once $basedir . '/vendor/redaxo5/lib/util/path.php';
-rex_path::init($REX['HTDOCS_PATH'], 'redaxo/include');
+
+// absoluten Pfad initialisieren
+rex_path::init($REX['HTDOCS_PATH'], 'redaxo');
 
 require_once $basedir . '/vendor/redaxo5/lib/autoload.php';
 rex_autoload::register();
@@ -31,6 +33,19 @@ rex_autoload::addDirectory(rex_path::addon($mypage, 'vendor'));
 rex_fragment::addDirectory(rex_path::addon($mypage, 'fragments'));
 
 rex_i18n::addDirectory(rex_path::addon($mypage, 'lang'));
+
+
+// relativen Pfad initialisieren
+rex_url::init($REX['HTDOCS_PATH'], rex_path::backend());
+
+
+// data Ordner erstellen -> /redaxo/data
+$data_dir = rtrim(rex_path::data(), DIRECTORY_SEPARATOR);
+if(!is_dir($data_dir)) {
+    $src_dir = rex_path::core('_tmp/data');
+    rex_dir::copy($src_dir, $data_dir);
+}
+
 
 switch ($REX['CUR_CLANG']) {
     case '1';
