@@ -17,9 +17,7 @@ $success = '';
 
 if ($func == 'update') {
     $req = rex_request('redaxo5_autoload', 'array');
-    if (count($req) > 0) {
-        $REX['ADDON']['REDAXO5']['AUTOLOAD'] = $req;
-    }
+    $REX['ADDON']['REDAXO5']['AUTOLOAD'] = $req;
 
     $content = '
 $REX[\'ADDON\'][\'REDAXO5\'][\'AUTOLOAD\'] = ' . var_export($REX['ADDON']['REDAXO5']['AUTOLOAD'], true) . ';
