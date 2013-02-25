@@ -37,6 +37,7 @@ echo '
         width: 150px;
         overflow: hidden;
         text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .redaxo5-class dl {
