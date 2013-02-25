@@ -80,6 +80,25 @@ if ($success != '') {
     echo rex_info($success);
 }
 
+
+$code = array(
+    'addon'         => '<?php
+$path = rex_path::addonData(\'addoff\', \'file.php\');
+$content = \'AddOn Data\';
+rex_file::put($path, $content);',
+
+
+    'addon_file'    => 'rex_path::addonData(\'addoff\', $file = \'\')',
+
+    'plugin'        => '<?php
+$path = rex_path::pluginData(\'addoff\', \'plugout\', \'file.php\');
+$content = \'PlugIn Data\';
+rex_file::put($path, $content);',
+
+
+    'plugin_file'   => 'rex_path::pluginData(\'addoff\', \'plugout\', $file = \'\')',
+);
+
 echo '
 
     <style type="text/css">
@@ -135,10 +154,38 @@ echo '
         <h2 class="rex-hl2" style="font-size: 100%;">' . rex_i18n::msg('redaxo5_structure') . '</h2>
         <div class="rex-addon-content">
             <dl>
-                <dt>fragments/</dt><dd>Fragmente</dd>
-                <dt>lang/</dt><dd>Sprachdateien</dd>
-                <dt>lib/</dt><dd>interne Klassen</dd>
-                <dt>vendor/</dt><dd>externe Klassen</dd>
+                <dt>fragments/</dt><dd>' . rex_i18n::msg('redaxo5_fragments') . '</dd>
+                <dt>lang/</dt><dd>' . rex_i18n::msg('redaxo5_language_files') . '</dd>
+                <dt>lib/</dt><dd>' . rex_i18n::msg('redaxo5_internal_classes') . '</dd>
+                <dt>vendor/</dt><dd>' . rex_i18n::msg('redaxo5_external_classes') . '</dd>
             </dl>
         </div>
-    </div>';
+    </div>
+
+
+    <div class="rex-addon-output">
+        <h2 class="rex-hl2" style="font-size: 100%;">' . rex_i18n::msg('redaxo5_data_dir') . '</h2>
+        <div class="rex-addon-content">
+            ' . rex_i18n::rawMsg('redaxo5_data_dir_intro') . '
+
+            <h3>' . rex_i18n::msg('redaxo5_addon') . '</h3>
+            ' . rex_highlight_string($code['addon'], true) . '
+
+            <p>' . rex_i18n::msg('redaxo5_data_dir_structure') . '</p>
+            <p class="rex-code"><code>/redaxo/data/addons/<b>addoff</b>/<b>file.php</b></code></p>
+
+            <p>' . rex_i18n::msg('redaxo5_data_dir_file') . '</p>
+            ' . rex_highlight_string($code['addon_file'], true) . '
+
+
+            <h3>' . rex_i18n::msg('redaxo5_plugin') . '</h3>
+            ' . rex_highlight_string($code['plugin'], true) . '
+
+            <p>' . rex_i18n::msg('redaxo5_data_dir_structure') . '</p>
+            <p class="rex-code"><code>/redaxo/data/addons/<b>addoff</b>/plugins/<b>plugout</b>/<b>file.php</b></code></p>
+
+            <p>' . rex_i18n::msg('redaxo5_data_dir_file') . '</p>
+            ' . rex_highlight_string($code['plugin_file'], true) . '
+        </div>
+    </div>
+';
