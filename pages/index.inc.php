@@ -7,7 +7,8 @@
  * @author mail[at]blumbeet[dot]com Thomas Blum
  *
  */
-$subpage = rex_request('subpage', 'string', 'autoload');
+$subpage = rex_request('subpage', 'string');
+$subpage = $subpage != '' ? $subpage : 'autoload';
 
 $subpages = array();
 if ($REX_USER->isValueOf('rights', 'admin[]')) {
