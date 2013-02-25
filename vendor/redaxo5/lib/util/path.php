@@ -133,7 +133,7 @@ class rex_path
     {
         // tab :: Pfad angepasst
         // return self::backend('cache/' . $file);
-        return self::backend('generated/files/' . $file);
+        return self::backend('include/generated/files/' . $file);
     }
 
     /**
@@ -163,7 +163,7 @@ class rex_path
     {
         // tab :: Pfad angepasst
         // return self::backend('src/' . $file);
-        return self::backend('' . $file);
+        return self::backend('include/' . $file);
     }
 
     /**
