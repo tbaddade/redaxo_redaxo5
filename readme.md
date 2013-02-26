@@ -18,7 +18,7 @@ Dazu muss auf der "Autoload"-Seite vom redaxo5-AddOn das eigene AddOn oder Plugi
 
 | Ordner        | Beschreibung      |
 | ------------- | ----------------- |
-| *fragments/*  |  Fragmente        |
+| *fragments/*  | Fragmente         |
 | *lang/*       | Sprachdateien     |
 | *lib/*        | interne Klassen   |
 | *vendor/*     | externe Klassen   |
@@ -60,7 +60,7 @@ echo $this->title . $this->html;
 
 rex_path wird für absolute Pfade genutzt
 
-callables im Backend vorhanden
+weitere callables im Backend vorhanden
 
 #### Beispiele #################################################################
 
@@ -74,6 +74,12 @@ $path = rex_path::backend();
 
 ```php
 $path = rex_path::backend($file = 'file.php');
+> /absoluter/Pfad/redaxo/file.php
+```
+
+
+```php
+$path = rex_path::src($file = 'file.php');
 > /absoluter/Pfad/redaxo/include/file.php
 ```
 
@@ -96,15 +102,22 @@ $path = rex_path::assets($file = 'image.jpg');
 ```
 
 
+
+```php
+rex_path::data($file = '')
+/absoluter/Pfad/redaxo/data/
+```
+
+
 ```php
 $path = rex_path::addon($addon = 'addoff', $file = '');
-> /absoluter/Pfad/files/addons/addoff/
+> /absoluter/Pfad/redaxo/include/addons/addoff/
 ```
 
 
 ```php
 $path = rex_path::plugin($addon = 'addoff', $plugin = 'plugout', $file = '');
-> /absoluter/Pfad/files/addons/addoff/plugins/plugout/
+> /absoluter/Pfad/redaxo/include/addons/addoff/plugins/plugout/
 ```
 
 
