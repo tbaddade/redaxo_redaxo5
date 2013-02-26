@@ -13,6 +13,7 @@ $subpage = $subpage != '' ? $subpage : 'autoload';
 $subpages = array();
 if ($REX_USER->isValueOf('rights', 'admin[]')) {
     $subpages[] = array(''              , rex_i18n::msg('redaxo5_autoload'));
+    $subpages[] = array('rex'           , 'rex');
     $subpages[] = array('rex_path'      , 'rex_path');
     $subpages[] = array('rex_url'       , 'rex_url');
     $subpages[] = array('rex_string'    , 'rex_string');
@@ -30,17 +31,38 @@ $mypage = 'redaxo5';
 
 $docs = array(
 
+    'rex'  => array(
+        'filter'        => array(
+            'setConfig',
+            'getConfig',
+            'hasConfig',
+            'removeConfig',
+            'isSetup',
+            'isDebugMode',
+            'isSafeMode'
+        ),
+        'replace'       => array(
+            'key'               => 'table_prefix',
+            'value'             => $REX['TABLE_PREFIX'],
+            'table'             => 'template',
+            'removeProperty'    => array('key' => 'temp_prefix'),
+            'getAccesskey'      => array('title' => 'accesskey Title', 'key' => 'APPLY'),
+        ),
+    ),
     'rex_fragment'  => array(
+        'filter'        => array(
+            '__get',
+            '__isset',
+        ),
         'replace'       => array(
             'name'          => 'redaxo5',
-            'dir'          => redaxo5_expandable(rex_path::base(), rex_path::addon('redaxo5', 'fragments')),
+            'dir'           => redaxo5_expandable(rex_path::base(), rex_path::addon('redaxo5', 'fragments')),
             'decorate'      => array('filename' => 'redaxo5.tpl', 'params' => array()),
             'subfragment'   => array('filename' => 'redaxo5.tpl', 'params' => array()),
             'i18n'          => array('key' => 'redaxo5_title'),
             'parse'         => array('filename' => 'redaxo5.tpl'),
             'setVar'        => array('name' => 'redaxo5', 'value' => 'REDAXO 4.5'),
         ),
-
     ),
     'rex_i18n'      => array(
         'filter'        => array(
