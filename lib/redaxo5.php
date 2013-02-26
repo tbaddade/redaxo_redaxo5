@@ -153,7 +153,7 @@ class redaxo5
                 continue;
             }
 
-            if (is_array($return)) {
+            if (is_array($return) || is_object($return)) {
                 $return = var_export($return, true);
             }
 
