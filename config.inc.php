@@ -34,9 +34,30 @@ rex_fragment::addDirectory(rex_path::addon($mypage, 'fragments'));
 
 rex_i18n::addDirectory(rex_path::addon($mypage, 'lang'));
 
-
 // relativen Pfad initialisieren
 rex_url::init($REX['HTDOCS_PATH'], rex_path::backend());
+
+
+// start timer at the very beginning
+rex::setProperty('timer', new rex_timer);
+// add backend flag to rex
+rex::setProperty('redaxo', $REX['REDAXO']);
+
+// ----------------- VERSION
+rex::setProperty('version', $REX['VERSION']);
+rex::setProperty('subversion', $REX['SUBVERSION']);
+rex::setProperty('minorversion', $REX['MINORVERSION']);
+
+// aus der config.yml uebernommen
+rex::setProperty('table_prefix', $REX['TABLE_PREFIX']);
+rex::setProperty('temp_prefix', $REX['TEMP_PREFIX']);
+rex::setProperty('accesskeys', $REX['ACKEY']);
+rex::setProperty('use_accesskeys', true);
+
+
+if (rex::isBackend() && $REX['USER']) {
+    rex::setProperty('user', $REX['USER']);
+}
 
 
 // data Ordner erstellen -> /redaxo/data
